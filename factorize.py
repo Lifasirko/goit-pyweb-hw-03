@@ -49,19 +49,4 @@ if __name__ == "__main__":
 
 # Вхідний список чисел
 # numbers = [128, 255, 99999, 10651060]
-#
-# # Вимірювання часу виконання синхронної версії
-# start_sync = time.time()
-# results_sync = factorize_sync(numbers)
-# end_sync = time.time()
-#
-# # Вимірювання часу виконання асинхронної версії
-# start_async = time.time()
-# results_async = factorize_async(numbers)
-# end_async = time.time()
-#
-# # Час виконання
-# time_sync = end_sync - start_sync
-# time_async = end_async - start_async
-#
-# results_sync, time_sync, results_async, time_async
+
