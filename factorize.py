@@ -1,5 +1,7 @@
+import concurrent.futures
 import time
 from multiprocessing import Pool, cpu_count
+
 
 
 def factorize_number(number):
@@ -16,16 +18,19 @@ def factorize_sync(numbers):
     return [factorize_number(number) for number in numbers]
 
 
-def factorize_async(numbers):
+def factorize_async(n):
     """Асинхронна версія функції факторизації з використанням multiprocessing."""
 
-    with Pool(processes=cpu_count()) as pool:
-        result = pool.map(factorize_number, numbers)
-    return result
+    with concurrent.futures.ProcessPoolExecutor(cpu_count()) as executor:
+        res = zip(n, executor.map(factorize_number, n))
+    return res
+    # with Pool(processes=cpu_count()) as pool:
+    #     res = pool.map(factorize_number, n)
+    # return res
 
 
-if __name__ == "__main__":
-    numbers = [128, 255, 99999, 10651060, 1548956211]
+def main():
+    numbers = [128, 255, 99999, 10651060, 154895621]
 
     print(f"Кількість ядер - {cpu_count()}")
 
@@ -44,9 +49,14 @@ if __name__ == "__main__":
     dur_diff = duration_sync - duration_async
     print(f"Синхронна функція виконувалась довше на {dur_diff} секунд")
 
-    for result in results_sync:
-        print(result)
+    # for result in results_sync:
+    #     print(f"results_sync: {result}")
+    # for result in results_parallel:
+    #     print(f"results_parallel: {result}")
+
 
 # Вхідний список чисел
 # numbers = [128, 255, 99999, 10651060]
 
+if __name__ == "__main__":
+    main()
