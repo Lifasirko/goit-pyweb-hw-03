@@ -3,7 +3,6 @@ import time
 from multiprocessing import Pool, cpu_count
 
 
-
 def factorize_number(number):
     """Функція для факторизації числа."""
     factors = []
@@ -39,20 +38,19 @@ def main():
     end_time_sync = time.time()
     duration_sync = end_time_sync - start_time_sync
     print(f"Synchronous execution time: {duration_sync} seconds")
+    for result in results_sync:
+        print(f"results_sync: {result}")
 
     start_time_async = time.time()
     results_parallel = factorize_async(numbers)
     end_time_async = time.time()
     duration_async = end_time_async - start_time_async
     print(f"Parallel execution time: {duration_async} seconds")
+    for result in results_parallel:
+        print(f"results_parallel: {result}")
 
     dur_diff = duration_sync - duration_async
     print(f"Синхронна функція виконувалась довше на {dur_diff} секунд")
-
-    # for result in results_sync:
-    #     print(f"results_sync: {result}")
-    # for result in results_parallel:
-    #     print(f"results_parallel: {result}")
 
 
 # Вхідний список чисел
